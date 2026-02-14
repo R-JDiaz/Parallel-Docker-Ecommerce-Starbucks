@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+
+  web: 
+    build: .
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql_master
+      - mysql_slave
+    volumes:
+      - ./app:/var/www/html  # mount your app code
+
+  mysql_master:
+    image: mysql:8.0
+    container_name: mysql_master
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: softeng
+    ports:
+      - "3306:3306"
+    volumes:
+      - master_data:/var/lib/mysql
+      - ./master.cnf:/etc/mysql/conf.d/master.cnf
+
+  mysql_slave:
+    image: mysql:8.0
+    container_name: mysql_slave
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"
+    volumes:
+      - slave_data:/var/lib/mysql
+      - ./slave.cnf:/etc/mysql/conf.d/slave.cnf
+    depends_on:
+      - mysql_master
+
+volumes:
+  master_data:
+  slave_data:

@@ -1,0 +1,2 @@
+docker exec -it mysql_slave mysql -uroot -p
+docker exec -it mysql_master mysql -uroot -p
