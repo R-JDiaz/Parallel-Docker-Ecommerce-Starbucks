@@ -1,0 +1,39 @@
+<div id="left">
+    <div class="cart-container-header">
+        <div class="selected-qty">
+        <input type="checkbox" checked>
+        <span>1/4 items selected</span>
+        </div>
+        <button id="rm-btn">remove</button>
+    </div>
+
+    <div id="cart-container" style="width: 95%">
+    </div>
+</div>
+<div id="right">
+    <h2>order summary</h2>
+    <div class="coupons">
+        <div class="coupon-icon"></div>
+        <input type="text" placeholder="Enter coupon code">
+    </div>
+    <div id="details">
+        <ul class="pinfo">
+            <li>Subtotal</li>
+            <li>₱ <span class="cartTotal">50.99</span></li>
+        </ul>
+        <ul class="del-info">
+            <li>Delivery fee</li>
+            <li>₱ <span class="deliveryFee">0.00</span></li>
+        </ul>
+        <ul class="couponinfo">
+            <li>Total Discount</li>
+            <li>₱<span class="cartDiscount">0.00</span></li>
+        </ul>
+    </div>
+    <div id="line"></div>
+    <ul class="amt">
+        <li>Total</li>
+        <li>₱ <span class="cartTotalAmt">00.0</span></li>
+    </ul>
+    <button id="order" onclick="checkout()">place order</button>
+</div>

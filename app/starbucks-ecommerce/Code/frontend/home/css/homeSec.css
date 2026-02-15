@@ -1,0 +1,268 @@
+
+/* HOME */
+/* Home-general */
+#home {
+    top:30vh;
+    height: 90vh;
+    display: flex;
+    flex-direction: row;
+}
+
+/* containers */
+#left {
+    background-color: var(--main-color-darkgreen);
+    width: 70vw;
+    padding: 7rem clamp(1rem, 5vw, 8rem);
+    display: flex;
+    flex-direction: column;
+}
+
+#right {
+    background-color: var(--sec-color-grey);
+    width: 30vw;
+    display: flex;
+    height: 100%;
+}
+
+/* left-contents-mid */
+#contents {
+    margin: clamp(2rem, 8vh, 8rem) 0;
+}
+
+#intro1 {
+    font-size: clamp(1.2rem, 4vw, 2rem);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+#intro2, #intro3 {
+    text-transform: uppercase;
+    font-size: clamp(2.5rem, 12vw, 6rem);
+    font-weight: 800;
+    color: white;
+    line-height: 100%;
+}
+
+#intro3 {
+    color: var(--main-color-green);
+}
+
+#CoffeeName {
+    margin-top: clamp(2rem, 10vh, 10vh);
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+    display: inline-block;
+}
+
+#description {
+    padding-top: 1vh;
+    width: min(100%, 50ch);
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    padding-bottom: 2vh;
+    font-style: italic;
+    color: white;
+}
+
+#rating {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--unique-color-yellow);
+    display: inline-block;
+    margin-left: clamp(0.5rem, 4vw, 2rem);
+}   
+
+.Cart {
+    height: 2rem;
+    width: clamp(8rem, 20vw, 12rem);
+}
+
+/* right-contents */
+#product {
+    position: absolute;
+    height: clamp(40vh, 80vh, 80vh);
+    top: 17vh;
+    right: clamp(5vw, 20vw, 20vw);
+    filter: drop-shadow(30px 0px 15px rgb(0, 0, 0, .5));
+    transform: rotate(10deg);
+    z-index: 0;
+    pointer-events: none; /* Prevents image from blocking clicks */
+}
+
+#name-container { 
+    height: 100%;
+    width: 50%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    padding: 2rem 0;
+    margin-right: 3vw;
+    overflow: hidden; /* Prevent text from overflowing container */
+}
+
+.name {
+    writing-mode: sideways-lr;
+    display: block;
+    font-size: min(7rem, 15vh);
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: 1;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: clip; /* Don't show ellipsis, just clip */
+}
+
+.first {
+    margin-bottom: auto;
+    font-size: min(7rem, 16vh);
+}
+
+.second {
+    -webkit-text-stroke: rgb(0, 0, 0) min(0.3rem, 0.6vh);
+    color: transparent;
+    font-size: min(7rem, 15vh);
+}
+
+/* Tablet Responsiveness (481px - 1024px) */
+@media (min-width: 481px) and (max-width: 1260px) {
+    #home {
+        flex-direction: column; /* stack left and right */
+        height: auto;
+        padding-top: 2rem;
+    }
+
+    #left, #right {
+        width: 100%; /* full width */
+        padding: 3rem 2rem;
+    }
+
+    /* Left Section */
+    #contents {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #intro1 {
+        font-size: clamp(0.9rem, 2.5vw, 1.5rem);
+        letter-spacing: 0.3rem;
+    }
+
+    #intro2, #intro3 {
+        font-size: clamp(2.2rem, 8vw, 4rem);
+    }
+
+    #CoffeeName {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+    }
+
+    #rating {
+        font-size: 0.8rem;
+        letter-spacing: 0.3rem;
+        margin-bottom: 1rem;
+    }
+
+    #description {
+        font-size: 0.8rem;
+        text-align: center;
+    }
+
+    /* Right Section */
+    #right {
+        position: relative;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #product {
+        position: relative; /* prevent overlapping */
+        top: 0;
+        right: 0;
+        height: clamp(25vh, 40vh, 50vh);
+        transform: rotate(5deg);
+        margin-bottom: 1rem;
+    }
+
+    #name-container {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .name {
+        writing-mode: horizontal-tb;
+        font-size: clamp(1.5rem, 5vw, 3.5rem);
+        text-align: center;
+        white-space: normal;
+        margin: 0.2rem 0;
+    }
+
+    .first, .second {
+        font-size: clamp(1.5rem, 4.5vw, 3rem);
+        -webkit-text-stroke: 0.1rem black;
+    }
+}
+
+@media (max-width: 480px) {
+    #home {
+        padding-top: 1rem;
+    }
+
+    #left, #right {
+        padding: 1rem;
+    }
+
+    #intro1 {
+        font-size: 0.5rem;
+        letter-spacing: 0.2rem;
+    }
+
+    #intro2, #intro3 {
+        font-size: 2.4rem;
+    }
+
+    #CoffeeName {
+        font-size: 1.2rem;
+    }
+
+    #rating {
+        font-size: 0.5rem;
+        letter-spacing: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    #description {
+        font-size: 0.7rem;
+        text-align: center;
+    }
+
+    #product {
+        height: clamp(20vh, 30vh, 40vh);
+        transform: rotate(0deg);
+        margin-bottom: 0.5rem;
+    }
+
+    .name {
+        font-size: clamp(1.2rem, 5vw, 3rem);
+    }
+
+    .first, .second {
+        font-size: clamp(1.2rem, 4.5vw, 2.5rem);
+        -webkit-text-stroke: 0.08rem black;
+    }
+
+    #name-container {
+        margin-bottom: 1rem;
+    }
+}

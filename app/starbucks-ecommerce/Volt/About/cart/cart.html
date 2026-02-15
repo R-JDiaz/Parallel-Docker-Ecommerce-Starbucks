@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Cart</title>
+    <link rel="stylesheet" href="cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <ul id="head-nav">
+        <li>
+            <img class="logo" src="../assets/starbucksLogo-nocircle.png" alt="starbucks">
+        </li>
+        <li class="nav-list">
+            <nav>
+                <a href="../home/home.html">Home</a>
+                <a href="../menu/menu.html">Menu</a>
+                <a href="">About Us</a>
+            </nav>
+        </li>
+        <li>
+            <ul id="icon-list">
+            <li>
+                <img class="icon" src="../assets/shopping-cart.png" alt="cart">
+                <img class="icon" src="../assets/user.png" alt="user">
+            </li>
+            <button onclick="window.location.href='../../frontend/login/login.html'">SIGN UP</button>
+            </ul>
+        </li>
+    </ul>
+
+    <div id="container">
+        <h1>my cart</h1>
+        <div id="cart">
+            <div id="left">
+                <div class="items-list-header">
+                    <div class="selected-qty">
+                    <input type="checkbox" checked>
+                    <span>1/4 items selected</span>
+                    </div>
+                    <button id="rm-btn">remove</button>
+                </div>
+
+                <div id="cart-container">
+                    <div class="prod">
+                        
+                    </div>
+            </div>
+            <div id="right">
+                <h2>order summary</h2>
+                <div class="coupons">
+                    <div class="coupon-icon"></div>
+                    <input type="text" placeholder="Enter coupon code">
+                </div>
+                <div id="details">
+                    <ul class="pinfo">
+                        <li>Subtotal</li>
+                        <li >₱<span id="cartTotal">50.99</span></li>
+                    </ul>
+                    <ul class="del-info">
+                        <li>Delivery fee</li>
+                        <li>₱25.00</li>
+                    </ul>
+                    <ul class="couponinfo">
+                        <li>Discount Amount</li>
+                        <li>₱<span id="cartDiscount">5.00</span></li>
+                    </ul>
+                </div>
+                <div id="line"></div>
+                <ul class="amt">
+                    <li>Total</li>
+                    <li>₱80.99</li>
+                </ul>
+                <button id="order">place order</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

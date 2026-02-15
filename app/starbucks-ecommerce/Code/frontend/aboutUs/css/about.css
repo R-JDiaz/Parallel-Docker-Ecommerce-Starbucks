@@ -1,0 +1,175 @@
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+:root {
+    --main-color-green: #00bb68;
+    --main-color-darkgreen: #00361f;
+    --main-color-lightgreen: #006c3d;
+    --sec-color-grey: rgb(207, 208, 206);
+    --text-color-dark: #333;
+}
+
+/* ================= HERO ================= */
+#about-hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6rem 4rem;
+    background-color: var(--main-color-darkgreen);
+    color: white;
+    flex-wrap: wrap;
+}
+
+.hero-content {
+    flex: 1 1 400px;
+    max-width: 600px;
+}
+
+.hero-content h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    line-height: 1.5;
+}
+
+.hero-image {
+    flex: 1 1 400px;
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-top: 2rem;
+}
+
+/* ================= MISSION ================= */
+#mission {
+    padding: 5rem 2rem;
+    background-color: var(--sec-color-grey);
+    text-align: center;
+}
+
+#mission h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--main-color-darkgreen);
+    margin-bottom: 1rem;
+}
+
+#mission p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ================= TEAM ================= */
+#team {
+    padding: 5rem 2rem;
+    background-color: white;
+    text-align: center;
+}
+
+#team h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--main-color-darkgreen);
+    margin-bottom: 3rem;
+}
+
+.team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.team-member {
+    flex: 1 1 200px;
+    max-width: 250px;
+    text-align: center;
+}
+
+.team-member img {
+    width: 250px;
+    border-radius: 50%;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--main-color-green);
+}
+
+.team-member h3 {
+    font-size: 1.2rem;
+    color: var(--main-color-darkgreen);
+    margin-bottom: 0.5rem;
+}
+
+.team-member p {
+    font-size: 0.95rem;
+    color: var(--text-color-dark);
+}
+
+/* ================= COMPANY STORY ================= */
+#story {
+    padding: 5rem 2rem;
+    background-color: var(--main-color-lightgreen);
+    color: white;
+    text-align: center;
+}
+
+#story h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 1.5rem;
+}
+
+#story p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+    #about-hero {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 4rem 2rem;
+    }
+
+    .hero-image {
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #team {
+        padding: 3rem 1rem;
+    }
+
+    .team-grid {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #mission p, #story p {
+        font-size: 0.9rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,40 @@
+<h2>Sign Up</h2>
+<input id="firstName" placeholder="First Name" />
+<input id="middleName" placeholder="Middle Name" />
+<input id="lastName" placeholder="Last Name" />
+<input id="signupEmail" placeholder="Email" />
+<input id="signupPass" type="password" placeholder="Password" />
+<input
+  id="signupPhone"
+  placeholder="Phone"
+  type="tel"
+  maxlength="11"
+  oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,11)"
+/>
+
+<input id="street" placeholder="Street" />
+
+<!-- Address selection -->
+<div id="country-container">
+  <h3>Select Country <span id="selected-country" class="selected-label"></span></h3>
+  <div id="country-buttons"></div>
+</div>
+
+<div id="province-container" style="display:none;">
+  <h3>Select Province <span id="selected-province" class="selected-label"></span></h3>
+  <div id="province-buttons"></div>
+</div>
+
+<div id="city-container" style="display:none;">
+  <h3>Select City <span id="selected-city" class="selected-label"></span></h3>
+  <div id="city-buttons"></div>
+</div>
+
+<input id="postalCode" placeholder="Postal Code" readonly />
+
+<button onclick="submitSignup()">Sign Up</button>
+
+<button onclick="goBack()">Back</button>
+
+<!-- Load signup.js -->
+<script type="module" src="./js/signup.js"></script>

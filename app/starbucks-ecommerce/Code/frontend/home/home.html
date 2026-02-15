@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="./css/home.css">
+
+</head>
+<body>
+    <script type="module" src="../header/header.js"></script>
+    <script type="module" src="../js/main.js"></script>
+    
+    <section id="home">
+        <div id="left">
+            <div id="contents">
+                <span class="title" id="intro1">Where Everycups tells a story.</span>
+                <h1 class="title" id="intro2">What's <span id="intro3">Yours?</span></h1>
+                <h2 class="title" id="CoffeeName">Classic Ice Coffee </h2><span id="rating">Best Rating</span>
+                <p id="description">"Indulge in the bold, smooth taste of Starbucks Iced Coffee — a refreshing escape in every sip. Expertly brewed from carefully selected, ethically sourced Arabica beans, it delivers a rich and satisfying flavor that's perfectly chilled to invigorate your senses. Whether you're powering through a busy workday, taking a moment to recharge, or simply enjoying the sunshine, this energizing blend is crafted to keep you cool, focused, and refreshed."</p>
+            </div>
+        </div>
+        <div id="right">
+            <img src="../assets/ClassicCup.png" alt="product" id="product">
+            <div id="name-container">
+                <h1 class="first name">Classic</h1>
+                <h1 class="second name">Ice-Coffee</h1>
+            </div>
+        </div>
+    </section>
+    
+    <section id="menu">
+        <nav>
+            <ul>
+                <li><div><a href="#menu" onclick="loadTopSelling('Beverages')">Beverages</a></div></li>
+                <li><div><a href="#menu" onclick="loadTopSelling('Food')">Food</a></div></li>
+                <li><div><a href="#menu" onclick="loadTopSelling('Merchandise')">Merchandise</a></div></li>
+            </ul>
+        </nav>
+        <div id="foodSelection">
+            <div id="itemList" class="top-selling-container">
+                <!-- Top selling items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="unmatched">
+        <div id="quote">
+            <h1>unmatched</h1>
+            <h1>quality</h1>
+        </div>
+        <img src="../assets/ClassicCup.png" alt="">
+        <div id="line">
+            <span>starbucks</span>
+            <span>starbucks</span>
+            <span>starbucks</span>
+            <span>starbucks</span>
+            <span>starbucks</span>
+            <span>starbucks</span>
+        </div>
+        <div class="word-con first-text">
+        </div>
+        <div class="word-con sec">
+        </div>
+    </section>
+
+ <!-- Modal -->
+  <div id="itemModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2 id="modalItemName"></h2>
+      <label>Size:
+        <select id="modalSize"></select>
+      </label>
+      <label>Quantity:
+        <input type="number" id="modalQuantity" value="1" min="1" />
+      </label>
+      <div class="modal-actions">
+        <button onclick="addToCart()">Add to Cart</button>
+        <button onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  
+    <script type="module" src="../../frontend/js/main.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+    loadTopSelling('Beverages'); // automatically loads beverages
+  });
+
+    document.querySelectorAll(".item-name").forEach(el => {
+  if (el.scrollWidth > el.clientWidth && !el.querySelector("span")) {
+    let text = el.textContent.trim();
+    el.innerHTML = `<span>${text}</span>`;
+    el.classList.add("marquee");
+
+    const span = el.querySelector("span");
+    const distance = span.scrollWidth + el.clientWidth; // total distance to scroll
+    const speed = 100; // pixels per second, adjust this value for speed
+
+    const duration = distance / speed; // time in seconds
+    span.style.animationDuration = `${duration}s`;
+  }
+});
+
+
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<h2>Sign Up</h2>
+<input id="firstName" placeholder="First Name" />
+<input id="middleName" placeholder="Middle Name" />
+<input id="lastName" placeholder="Last Name" />
+<input id="signupEmail" placeholder="Email" />
+<input id="signupPass" type="password" placeholder="Password" />
+<input
+  id="signupPhone"
+  placeholder="Phone"
+  type="tel"
+  oninput="
+    // Allow digits, and '+' only at the start
+    this.value = this.value.replace(/(?!^\+)[^\d]/g, '');
+    // Limit to max 13 characters (+63XXXXXXXXXX)
+    if (this.value.startsWith('+')) {
+      this.value = this.value.slice(0, 13);
+    } else {
+      this.value = this.value.slice(0, 11);
+    }
+  "
+/>
+
+
+<input id="street" placeholder="Street" />
+
+<!-- Address selection -->
+<div id="country-container">
+  <h3>Select Country <span id="selected-country" class="selected-label"></span></h3>
+  <div id="country-buttons"></div>
+</div>
+
+<div id="province-container" style="display:none;">
+  <h3>Select Province <span id="selected-province" class="selected-label"></span></h3>
+  <div id="province-buttons"></div>
+</div>
+
+<div id="city-container" style="display:none;">
+  <h3>Select City <span id="selected-city" class="selected-label"></span></h3>
+  <div id="city-buttons"></div>
+</div>
+
+<input id="postalCode" placeholder="Postal Code" readonly />
+<button id="signupBtn" onclick="submitSignup()" disabled>Sign Up</button>
+
+<!-- Floating full-screen spinner overlay -->
+<div id="otpLoadingOverlay" style="display:none;">
+  <div class="spinner-container">
+    <p>Loading...</p>
+    <div class="spinner"></div>
+  </div>
+</div>
+
+
+<!-- OTP Modal -->
+<div id="otpModal" class="otp-modal">
+  <div class="otp-modal-content">
+    <h2>Email Verification</h2>
+    <p>Enter the OTP sent to your email:</p>
+    <input type="text" id="otpInput" maxlength="6" placeholder="Enter 6-digit OTP" />
+    <div class="otp-actions">
+      <button id="verifyOtpBtn">Verify</button>
+      <button id="cancelOtpBtn">Cancel</button>
+      <button id="resendOtpBtn">Resend OTP</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<button onclick="goBack()">Back</button>
+
+<!-- Load signup.js -->
+<script type="module" src="./js/signup.js"></script>
+
+<style>
+.otp-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 9999;
+  inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0 */
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+#otpLoadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.8); /* semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; /* higher than otp modal */
+    flex-direction: column;
+    font-family: sans-serif;
+}
+
+#otpLoadingOverlay .spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top-color: #1a73e8; /* blue */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-top: 10px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Modal Box */
+.otp-modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.otp-modal-content h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #333;
+}
+
+.otp-modal-content p {
+  margin-bottom: 15px;
+  color: #666;
+}
+
+#otpInput {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.otp-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.otp-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#verifyOtpBtn {
+  background: #28a745;
+  color: white;
+}
+
+#verifyOtpBtn:hover {
+  background: #218838;
+}
+
+#cancelOtpBtn {
+  background: #dc3545;
+  color: white;
+}
+
+#cancelOtpBtn:hover {
+  background: #c82333;
+}
+/* Success check animation */
+.otp-modal-content .success-check {
+  font-size: 50px;
+  color: #28a745;
+  animation: pop 0.4s ease forwards;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+#verifyOtpBtn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+</style>

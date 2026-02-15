@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Only rewrite if the requested file/folder doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite to backend/api/index2.php with remaining path
+RewriteRule ^(.*)$ ../backend/api/index2.php/$1 [QSA,L]

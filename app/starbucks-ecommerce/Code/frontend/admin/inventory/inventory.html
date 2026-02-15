@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Inventory Management</title>
+  <link rel="stylesheet" href="css/inventory.css">
+  <style>
+    /* Block screen overlay */
+    #block-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Inventory Management</h1>
+
+  <!-- Back to Admin Panel -->
+  <div style="margin-bottom: 20px;">
+    <button onclick="window.location.href='../panel/panel.html'">
+      ← Back to Admin Panel
+    </button>
+  </div>
+
+  <div class="inventory-menu">
+    <button onclick="window.location.href='components/item_management.html?action=add'">
+      Item Management
+    </button>
+    <button onclick="window.location.href='components/stock_management.html'">
+      Stock Management
+    </button>
+    <button onclick="window.location.href='components/view_recipes.html'">
+      View Recipes
+    </button>
+    <button onclick="window.location.href='components/ingredient_management.html'">
+      Ingredient Management
+    </button>
+  </div>
+
+  <script>
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const isGuest = localStorage.getItem("isGuest") === "true";
+    const userRole = loggedInUser ? loggedInUser.type : (isGuest ? "guest" : null);
+
+    if (!userRole) {
+      // Not logged in
+      document.body.innerHTML = "";
+      const overlay = document.createElement("div");
+      overlay.id = "block-overlay";
+      overlay.textContent = "🚨 Security Alert: You must log in first to access the inventory panel.";
+      document.body.appendChild(overlay);
+    } else if (userRole !== "admin") {
+      // Logged in but not admin
+      document.body.innerHTML = "";
+      const overlay = document.createElement("div");
+      overlay.id = "block-overlay";
+      overlay.textContent = "⛔ Access Denied: This panel is restricted to Admins only.";
+      document.body.appendChild(overlay);
+    }
+  </script>
+</body>
+</html>

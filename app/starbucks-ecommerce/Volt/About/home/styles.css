@@ -1,0 +1,507 @@
+*, body, html {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box; 
+   font-family: 'Inter', sans-serif;
+   font-size: 16px;
+}
+body {
+    background-color: #00170e;
+    overflow-x: hidden;
+}
+
+:root {
+    --main-color-green: #00bb68;
+    --main-color-darkgreen: #00361f;
+    --main-color-lightgreen: #006c3d;
+    --unique-color-yellow: #b9d401;
+    --big-font-size: 4.06rem;
+    --biggest-font-size: 8rem;
+}
+.thin {
+  font-weight: 100;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.extra-bold {
+  font-weight: 800;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+section {
+    height: 90vh;
+    width: 85vw;
+    margin: 5vh auto;
+}
+#top {
+    height: 4.25rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#top img {
+    width: 4.25rem;
+    height: 4.25rem;
+}
+#top #nav {
+    background-color: white;
+    height: 100%;
+    width: 40vw;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    border-radius: 35px;
+    justify-content: center;
+}
+#nav a{
+    color: rgb(0, 0, 0);
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 13px 3vw;
+       border-radius: 35px;
+}
+#nav a:hover{
+    background-color: var(--main-color-darkgreen);
+    border-radius: 35px;
+    color: white;
+}
+#top ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    width: 6vw;
+}
+#top .icon {
+    width: 2.5rem;
+    height: 2rem;
+    padding-left: 10px;
+    cursor: pointer;
+    
+}
+#contents {
+    width: 100vw;
+    height: 100vh;
+    flex-wrap: wrap;
+    color: white;
+    display: flex;
+}
+#leftHome {
+    width: 70vw;
+    height: 100vh;
+    padding-top: 15vh;
+
+}
+
+.title {
+    text-transform: uppercase;
+}
+#leftHome #intro1{
+    font-size: 1.5rem;
+    
+}
+#leftHome #intro2 , #intro3{
+    font-size: 4.5rem;
+    font-weight: 900;
+    color: white;
+    line-height: 90%;
+}
+#intro3 {
+    color: var(--main-color-green)
+}
+#CoffeeName {
+    padding-top: 3vh;
+    font-size: 1.5rem ;
+    font-weight: 600;
+}
+#description {
+
+    padding-top: 1vh;
+    width: 50%;
+    font-weight: normal;
+    letter-spacing: 1px;
+    font-size: .8rem;
+    padding-bottom: 2vh;
+}
+#rating {
+    font-size: .8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--unique-color-yellow);
+    display: flex;
+    align-items: center;
+}   
+#ratingVal {
+    font-size: 3rem;
+    color: var(--main-color-green);
+    font-weight: 550;
+    padding-left: .6vw;
+}
+.Cart {
+    background-color: white;
+    padding: .5rem 3rem;
+    color: var(--main-color-darkgreen);
+    text-transform: uppercase;
+    font-weight: 700;
+    border: none;
+    border-radius: 80px;
+    font-size: .9rem;
+    font-weight: bolder;
+    margin-top: .7vh;
+}
+
+#selection {
+    width: 85%;
+    height: 17vh;
+    background-color: #006c3d;
+    border-radius: 20px;
+    position: relative;
+    left: -10vw;
+    z-index: 2;
+    margin-top: 5vh; 
+    padding: 0 8vw 0 13vw;
+    display: flex;
+    align-items: center;
+}   
+#selection ul {
+    display: flex;
+    list-style: none;
+    width: 85%;
+    justify-content: space-between;
+    align-items: center;
+    overflow: visible;
+}
+#selection img {
+    height: 13.5vh;
+    width: 4.3vw;
+    filter: drop-shadow( 4px 3px 4px rgb(0, 0, 0, .7));
+}
+#selection .inner-circle {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;  /* baseline */
+  transition: background-color 0.3s;
+}
+#selection .outer-circle {
+  height: 12rem;
+  width: 12rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;  /* baseline */
+  transition: background-color 0.3s;
+}
+
+#selection li:hover .inner-circle {
+    background-color: white;
+    cursor: pointer;
+}
+
+#selection li:hover .outer-circle {
+    background-color: var(--main-color-lightgreen);
+}
+#rightHome {
+    width: 30vw;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#rightHome #greenBg{
+    background-color: var(--main-color-lightgreen);
+    height: 90%;
+    width: 100%;    
+    border-radius: 10%;
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+#greenBg img {
+    height: 25rem;
+    width: 12rem;
+    margin: auto 0 auto 0;
+    position: relative;
+    right: 6.7vw;
+    filter: drop-shadow(35px 0px 20px rgb(0, 0, 0, .4));
+}
+#rightHome #nameContainer {
+    width: 40%;
+    height: 98%;
+    position: absolute;
+    left: 17%;
+    overflow: hidden;
+    display: flex;
+    font-size: 1vw;
+}
+#rightHome h1 {
+    writing-mode: sideways-lr;
+    font-size: 6em;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+#rightHome #firstName {
+    position: absolute;
+    align-self: flex-end;
+}
+#rightHome #secondName {
+    position: absolute;
+    font-size: 5.8em;
+    white-space: nowrap;
+    color: rgb(0, 0, 0, .0);
+    -webkit-text-stroke: rgb(255, 255, 255) 3px;
+    left: 45%;
+}
+#menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+#menu nav {
+    width: inherit;
+    height: 25vh;
+    margin-top: 5vh;
+}
+#menu nav ul {
+    width: 65%;
+    height: 9vh;
+    background-color: white;
+    border-radius: 70px;
+    margin: auto;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#menu nav ul li{
+    width: 14vw;
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+#menu nav ul li:hover {
+    background-color: rgb(83, 83, 83, .5);
+    border-radius: 0;
+}  /*true hover */
+#menu nav ul li:hover {
+    background-color: #00361f;
+    border-radius: inherit;
+    box-shadow: 8px 0px 8px rgb(0, 0, 0, .7);
+}
+#menu nav ul li:hover div a{
+    color: white
+}
+
+#menu nav ul li div{
+    width: inherit;
+    height: 3vh;
+    border-right: solid 2px rgba(7, 7, 7, 0.5);
+    display: flex;
+}
+#menu nav ul li a{
+    text-decoration: none;
+    color: black;
+    font-weight: 700;
+    font-size: large;
+    margin: auto;
+    text-transform: uppercase;
+}
+
+#menu #foodSelection {
+    width: 60vw;
+    height: 50vh;
+
+    display: flex;
+}
+#menu #foodSelection ul{
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-between;
+    width: inherit;
+    height: inherit;
+}
+
+#menu #foodSelection ul .prodInfo {
+    background-color: #ffffff;
+    height: 65%;
+    width: 13vw;
+    border-radius: 20px;
+    
+}
+#menu #foodSelection ul .prodInfo:hover {
+    background-color: var(--main-color-lightgreen);
+    height: 70%;
+    width: 15vw;
+}
+#menu #foodSelection .prodInfo:hover .contents h2,.prodInfo:hover #ingName li{
+    color: white;
+}
+#menu #foodSelection ul .prodInfo:hover .contents #ingOpt a{
+    color: black;
+}
+#menu #foodSelection .prodInfo:hover .ingInfo {
+    gap: 4vw;
+}
+#menu #foodSelection ul .prodInfo:hover .contents button {
+    margin-top: 7vh;
+    background-color: white;
+    color: var(--main-color-darkgreen);
+    font-weight: 600;
+}
+
+#menu #foodSelection ul .contents {
+    position: relative;
+    bottom: 80px;
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#menu #foodSelection ul .contents h2 {
+    text-transform: uppercase;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+#menu #foodSelection .ingInfo {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    gap: 4.4vh;
+    height: 15vh;
+}
+#menu #foodSelection .ingInfo ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 4vw;
+    height: 10vh;
+}
+#menu #foodSelection .ingInfo ul li, a{
+  font-size: .8rem;
+  text-transform: uppercase;
+  font-weight: 500;
+} 
+#menu #foodSelection .ingInfo #ingOpt a {
+    color: var(--main-color-darkgreen);
+    text-transform: uppercase;
+}
+#menu #foodSelection .ingInfo #ingOpt{
+    display: flex;
+    justify-content: flex-start;
+}
+#menu #foodSelection ul li img{
+    height: 20vh;
+    width: 10vh;
+    filter: drop-shadow(0px 3px 5px rgb(0,0,0, .7));
+}
+#menu #foodSelection button {
+    border-radius: 70px;
+    background-color: #00361f;
+    color: white;
+    text-transform: uppercase;
+    font-size: .6rem;
+    padding: 6px 20px;
+    cursor: pointer;
+    margin-top: 2vw;
+    border: none;
+}
+#unmatched {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+#unmatched h1{
+    font-size: 7rem;
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: white; 
+    
+}
+#unmatched #quote {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 150px;
+}
+#unmatched img {
+    z-index: 2;
+    filter: drop-shadow(5px 5px 10px black);
+}
+#unmatched #line{
+    z-index: 3;
+    background-color: #006c3d;
+    width: 120vw;
+    height: 9vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10vw;
+    transform: rotate(-20deg);
+    position: absolute;
+    bottom:  15vh;
+    filter: drop-shadow(5px 5px 5px black);
+}
+#unmatched #line span {
+    font-size: 3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: white;
+    animation: marquee 10s linear infinite; 
+}
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+#unmatched p {
+    position: absolute;
+}
+
+/* Ensure buttons inside nav tabs fill their container div exactly */
+#menu nav ul li > div > button {
+  all: unset;                     /* remove default button styles */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: large;
+}
+
+/* Inherit the same hover from the <li> background */
+#menu nav ul li:hover > div > button {
+  color: white;
+}
+
+/* Make sure the <button> text color matches the <a> by default */
+#menu nav ul li > div > button {
+  color: black;
+}
+
+

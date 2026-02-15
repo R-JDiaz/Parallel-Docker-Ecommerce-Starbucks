@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Inventory — Ingredient Management</title>
+  <link rel="stylesheet" href="../css/ingredient_management.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Overlay styling */
+    #block-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+    #block-overlay button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ingredient Management</h1>
+
+  <div class="header-controls">
+    <button id="btnBack">← Back to Inventory Menu</button>
+    <button id="btnRefreshIngredients">🔄 Refresh All Ingredients</button>
+  </div>
+
+  <!-- Add Ingredient Stock Form -->
+  <section id="addIngredientSection">
+    <h2>Add Ingredient Stock</h2>
+    <form id="addIngredientForm">
+      <select id="ingredientSelect" required>
+        <option value="">Select Ingredient</option>
+      </select>
+      <input type="number" id="stockQuantity" placeholder="Quantity" min="0" step="0.01" required>
+      <select id="unitSelect" required>
+        <option value="">Select Unit</option>
+        <option value="kg">Kilograms (kg)</option>
+        <option value="g">Grams (g)</option>
+        <option value="l">Liters (l)</option>
+        <option value="ml">Milliliters (ml)</option>
+        <option value="pcs">Pieces (pcs)</option>
+        <option value="cups">Cups</option>
+        <option value="tbsp">Tablespoons</option>
+        <option value="tsp">Teaspoons</option>
+      </select>
+      <button type="submit">Add Ingredient Stock</button>
+    </form>
+  </section>
+
+  
+
+  <!-- Add New Ingredient Section -->
+  <section id="newIngredientSection">
+    <h2>Add New Ingredient</h2>
+    <form id="newIngredientForm">
+      <input type="text" id="newIngredientName" placeholder="Ingredient Name" required>
+      <select id="newIngredientUnit">
+        <option value="">Select Stock Unit (optional)</option>
+        <option value="kg">Kilograms (kg)</option>
+        <option value="g">Grams (g)</option>
+        <option value="l">Liters (l)</option>
+        <option value="ml">Milliliters (ml)</option>
+        <option value="pcs">Pieces (pcs)</option>
+      </select>
+      <select id="newIngredientSupplier">
+        <option value="">Select Supplier (optional)</option>
+        <option value="1">Supplier A</option>
+        <option value="2">Supplier B</option>
+      </select>
+      <button type="submit">Add New Ingredient</button>
+    </form>
+  </section>
+
+  <!-- Threshold Settings -->
+<section id="thresholdSection">
+  <h2>Stock Threshold Settings</h2>
+  <div class="threshold-item">
+    <label for="thresholdInput_g">Grams (g):</label>
+    <input type="number" id="thresholdInput_g" min="1" step="1">
+    <button id="btnSetThreshold_g">Apply</button>
+  </div>
+  <div class="threshold-item">
+    <label for="thresholdInput_pcs">Pieces (pcs):</label>
+    <input type="number" id="thresholdInput_pcs" min="1" step="1">
+    <button id="btnSetThreshold_pcs">Apply</button>
+  </div>
+  <div class="threshold-item">
+    <label for="thresholdInput_ml">Milliliters (ml):</label>
+    <input type="number" id="thresholdInput_ml" min="1" step="1">
+    <button id="btnSetThreshold_ml">Apply</button>
+    <button id="btnResetThresholds">Reset Thresholds</button>
+
+  </div>
+</section>
+
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="ingredientSearch" placeholder="Search ingredients by name...">
+    <div id="suggestionsBox" class="suggestions"></div>
+  </div>
+
+  <!-- Current Ingredient Stocks Display -->
+  <section id="ingredientListSection">
+    <h2>Current Ingredient Stock Levels</h2>
+    <div id="ingredientsContainer">
+      <div class="ingredient-empty">Loading ingredients...</div>
+    </div>
+  </section>
+
+  
+
+  <!-- Update Ingredient Modal -->
+  <div id="updateIngredientModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeUpdateModal">&times;</span>
+      <h3>Update Ingredient</h3>
+      <form id="updateIngredientForm">
+        <input type="hidden" id="updateIngredientId" />
+        <label for="updateIngredientName">Name:</label>
+        <input type="text" id="updateIngredientName" required />
+        <label for="updateIngredientUnit">Unit:</label>
+        <select id="updateIngredientUnit" required>
+          <option value="">Select unit</option>
+          <option value="kg">kg</option>
+          <option value="g">g</option>
+          <option value="pcs">pcs</option>
+          <option value="liters">liters</option>
+          <option value="ml">ml</option>
+          <option value="cups">cups</option>
+          <option value="tbsp">tbsp</option>
+          <option value="tsp">tsp</option>
+        </select>
+        <button type="submit">Update</button>
+        <button type="button" id="cancelUpdate">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Config must load first so window.API_BASE_PATH is set -->
+  <script type="module" src="../../../js/config.js"></script>
+  <!-- App logic -->
+  <script type='module' src="../js/ingredient_management.js"></script>
+
+<script>
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const isGuest = localStorage.getItem("isGuest") === "true";
+  const userRole = loggedInUser ? loggedInUser.type : (isGuest ? "guest" : null);
+
+  if (!userRole) {
+    // Not logged in
+    document.body.innerHTML = "";
+    const overlay = document.createElement("div");
+    overlay.id = "block-overlay";
+    overlay.innerHTML = `
+      🚨 Security Alert: You must log in first to access the admin panel.
+      <button onclick="location.reload()">Reload</button>
+    `;
+    document.body.appendChild(overlay);
+  } else if (userRole !== "admin") {
+    // Logged in but not admin
+    document.body.innerHTML = "";
+    const overlay = document.createElement("div");
+    overlay.id = "block-overlay";
+    overlay.innerHTML = `
+      ⛔ Access Denied: This panel is restricted to Admins only.
+      <button onclick="window.history.back()">Go Back</button>
+    `;
+    document.body.appendChild(overlay);
+  }
+</script>
+
+</body>
+</html>

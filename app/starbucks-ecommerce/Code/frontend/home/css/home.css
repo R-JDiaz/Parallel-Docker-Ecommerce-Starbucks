@@ -1,0 +1,159 @@
+/* General */
+@import url("itemCard.css");
+@import url("paymentModal.css");
+@import url("homeSec.css");
+@import url("menu.css");
+*, body, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+:root {
+    --main-color-green: #00bb68;
+    --main-color-darkgreen: #00361f;
+    --main-color-lightgreen: #006c3d;
+    --sec-color-grey: rgb(207, 208, 206);
+    --unique-color-yellow: #b9d401;
+    --big-font-size: clamp(2rem, 5vw, 4.06rem);
+    --biggest-font-size: clamp(3rem, 8vw, 8rem);
+}
+
+section {
+    width: 100vw;
+    overflow: hidden;
+}
+
+body, html {
+    overflow-x: hidden;
+}
+
+/* Top Selling Items Section */
+#menu #foodSelection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+#menu #foodSelection h2 {
+    text-transform: uppercase;
+    margin: 2rem 0;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    text-align: center;
+    color: var(--main-color-lightgreen);
+    font-weight: 700;
+}
+
+
+/* unmatched */
+#unmatched {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: var(--main-color-darkgreen);
+    padding: 2rem;
+    overflow: hidden;
+    height: 100vh;
+}
+
+#unmatched h1 {
+    font-size: clamp(3rem, 12vw, 7rem);
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+}
+
+#unmatched #quote {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: clamp(100px, 20vh, 150px);
+}
+
+#unmatched img {
+    z-index: 2;
+    filter: drop-shadow(5px 5px 10px black);
+    max-width: 100%;
+    height: auto;
+}
+
+#unmatched #line {
+    z-index: 3;
+    background-color: #006c3d;
+    width: 120vw;
+    height: clamp(6vh, 9vh, 9vh);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 10vw;
+    transform: rotate(-15deg);
+    position: absolute;
+    bottom: 25vh;
+    filter: drop-shadow(5px 5px 5px black);
+}
+
+#unmatched #line span {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: white;
+    animation: marquee 10s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+#unmatched p {
+    position: absolute;
+    color: white;
+    font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+}
+
+.word-con {
+    width: clamp(6rem, 15vw, 10rem);
+    height: clamp(6rem, 15vw, 10rem);
+}
+
+.quote {
+    color: white;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
+    align-items: center;
+    text-align: center;
+    max-width: 200px;
+}
+
+.first-text {
+    position: absolute;
+    top: 60vh;
+    left: clamp(5vw, 30vw, 30vw);
+}
+
+.sec {
+    position: absolute;
+    top: 80vh;
+    right: clamp(5vw, 10vw, 10vw);
+}
+#admin-btn-container button {
+  padding: 10px 20px;
+  background: #006241; /* Starbucks green */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#admin-btn-container button:hover {
+  background: #004d33;
+}

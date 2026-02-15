@@ -1,0 +1,86 @@
+<!-- menu.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu Page Tester</title>
+  <link rel="stylesheet" href="menu.css" />
+</head>
+<body>
+  <script src="../header/header.js" type="module"></script>
+
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search for products..." autocomplete="off" />
+  <div id="suggestionsBox" class="suggestions"></div>
+</div>
+
+
+  <main>
+  <div class="container">
+    <!-- Left sidebar for buttons -->
+    <div class="sidebar" id="sidebar" >
+      <h2>Categories</h2>
+      <button class="category-btn" onclick="window.menu.setCategory(2); loadCategory('Food')">🍽️ Food</button>
+      <button class="category-btn" onclick="window.menu.setCategory(1); loadCategory('Beverages')">🥤 Beverages</button>
+      <button class="category-btn" onclick="window.menu.setCategory(3); loadCategory('Merchandise')">🛍️ Merchandise</button>
+      
+      <div id="subcategorySection" style="display:none;">
+        <h3>Subcategories</h3>
+        <div id="subcategoryButtons"></div>
+      </div>
+      
+      <button id="backButton" onclick="window.menu.resetCategory(); showCategories()" style="display:none">🔙 Back</button>
+    </div>
+    
+    <!-- Right content area for products -->
+    <div class="content" id="content">
+      <div id="itemList"></div>
+    </div>
+  </div>
+</main>
+
+  <!-- Modal -->
+  <div id="itemModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h2 id="modalItemName"></h2>
+      <label>Size:
+        <select id="modalSize"></select>
+      </label>
+      <label>Quantity:
+        <input type="number" id="modalQuantity" value="1" min="1" />
+      </label>
+      <div class="modal-actions">
+        <button onclick="addToCart()">Add to Cart</button>
+        <button onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="paymentModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <h3>🧾 Checkout</h3>
+      <p>Total: ₱<span id="paymentTotal">0.00</span></p>
+      <p>Discount: ₱<span id="paymentDiscount">0.00</span></p>
+      <p>Final: ₱<span id="finalAmount">0.00</span></p>
+      <label>Cash:
+        <input type="number" id="cashInput" placeholder="Enter cash" />
+      </label>
+      <label>Payment Type:
+        <select id="paymentType">
+          <option value="cash">Cash</option>
+          <option value="gcash">GCash</option>
+        </select>
+      </label>
+      <div class="modal-actions">
+        <button onclick="processPayment()">Pay</button>
+        <button onclick="closePaymentModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="module" src="../js/main.js"></script>
+    <script type="module" src="./menuMain.js"></script>
+</body>
+</html>

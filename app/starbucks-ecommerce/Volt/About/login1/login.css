@@ -1,0 +1,206 @@
+/* login.css - redesigned to match the modern green UI */
+
+:root {
+  --main-color-green: #00bb68;
+  --main-color-darkgreen: #00361f;
+  --main-color-lightgreen: #006c3d;
+  --unique-color-yellow: #b9d401;
+}
+
+*, html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+}
+
+body {
+  background-color: #00170e;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Centered login card */
+.container {
+  background-color: var(--main-color-darkgreen);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 40px rgba(0, 255, 157, 0.1);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+/* Header */
+h2 {
+  color: var(--main-color-green);
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px 16px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 10px;
+  background-color: #00361f;
+  color: white;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  background-color: #004b2b;
+  border: 2px solid var(--main-color-green);
+}
+
+/* Submit Button */
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--main-color-green);
+  border: none;
+  border-radius: 100px;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--main-color-lightgreen);
+  transform: translateY(-2px);
+}
+
+/* Error Message */
+.error-msg {
+  margin-top: 15px;
+  color: #ff4d4d;
+  background-color: rgba(255, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  display: none;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: transparent;
+  color: white;
+  border: 2px solid var(--main-color-green);
+  border-radius: 30px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  z-index: 1000;
+}
+
+.back-button:hover {
+  background-color: var(--main-color-green);
+  color: white;
+}
+
+/* Container boxes for selectors */
+#country-container, 
+#province-container, 
+#city-container {
+  width: 220px;
+  margin: 0 auto 20px;
+  background-color: #004b2b;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 187, 104, 0.3);
+  text-align: center;
+  color: white;
+  font-size: 1.1rem;
+}
+
+/* Buttons container: fixed height + scroll */
+#country-buttons,
+#province-buttons,
+#city-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  
+  max-height: 150px;    /* limit height */
+  overflow-y: auto;     /* vertical scrollbar */
+  padding-right: 5px;   /* spacing for scrollbar */
+}
+
+/* Individual buttons */
+#country-buttons button,
+#province-buttons button,
+#city-buttons button {
+  background-color: var(--main-color-green);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  min-width: 80px;
+  white-space: nowrap;
+}
+
+#country-buttons button:hover,
+#province-buttons button:hover,
+#city-buttons button:hover {
+  background-color: var(--main-color-lightgreen);
+}
+
+/* Label showing selected item */
+.selected-label {
+  font-weight: 600;
+  color: var(--unique-color-yellow, #b9d401);
+  margin-left: 10px;
+}
+
+/* Make selectors smaller & scrollable */
+#country-buttons, #province-buttons, #city-buttons {
+  max-height: 150px; /* height you want */
+  overflow-y: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+#country-buttons button,
+#province-buttons button,
+#city-buttons button {
+  flex: 1 1 45%; /* roughly two buttons per row */
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--main-color-green, #00bb68);
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+#country-buttons button:hover,
+#province-buttons button:hover,
+#city-buttons button:hover {
+  background-color: var(--main-color-lightgreen, #006c3d);
+}

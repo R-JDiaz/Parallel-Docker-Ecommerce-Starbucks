@@ -1,0 +1,17 @@
+<h1>Sign in</h1>
+<p>Don't have an account? <a href="#" onclick="showForm('signup')">Create now</a></p>
+
+<form onsubmit="login(); return false;">
+  <label>Email</label>
+  <input type="email" id="email" placeholder="Email" required>
+
+  <label>Password</label>
+  <div class="password-container">
+      <input type="password" id="password" placeholder="Password" required>
+  </div>
+
+  <button type="submit" class="signin-btn">Log In</button>
+</form>
+
+<div class="divider">or</div>
+<button class="fb-btn" onclick="continueWithoutAccount()">Continue as a Guest</button>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Recipes</title>
+  <link rel="stylesheet" href="../css/view_recipes.css">
+  <style>
+    /* Overlay styling */
+    #block-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+    #block-overlay button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>View Recipes</h1>
+
+  <!-- Header controls -->
+  <div class="header-controls">
+    <button id="btnBack">← Back to Inventory Menu</button>
+  </div>
+
+  <!-- Search Container -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search recipes by ingredient name..." />
+  </div>
+
+  <!-- Recipe container -->
+  <div id="recipesContainer"></div>
+
+  <!-- JS -->
+  <script type="module" src="../../../js/config.js"></script>
+  <script src="../js/view_recipes.js"></script>
+
+  <!-- Security overlay -->
+  <script>
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const userRole = loggedInUser ? loggedInUser.type : null;
+  const userName = localStorage.getItem("customer_name") || "Guest";
+
+  if (!userRole) {
+    // Not logged in
+    document.body.innerHTML = "";
+    const overlay = document.createElement("div");
+    overlay.id = "block-overlay";
+    overlay.textContent = "🚨 Security Alert: You must log in first to access the admin panel.";
+    document.body.appendChild(overlay);
+  } else if (userRole !== "admin") {
+    // Logged in but not admin
+    document.body.innerHTML = "";
+    const overlay = document.createElement("div");
+    overlay.id = "block-overlay";
+    overlay.textContent = "⛔ Access Denied: This panel is restricted to Admins only.";
+    document.body.appendChild(overlay);
+  } else {
+    // If admin, insert welcome message below <h1>
+    const mainTitle = document.querySelector("h1");
+    if (mainTitle) {
+      mainTitle.insertAdjacentHTML("afterend", `<p id="welcome-msg">Welcome, ${userName} (Admin)!</p>`);
+    }
+  }
+  </script>
+
+</body>
+</html>

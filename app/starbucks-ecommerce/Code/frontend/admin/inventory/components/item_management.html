@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Inventory — Item Management</title>
+  <link rel="stylesheet" href="../css/item_management.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    /* Overlay styling */
+    #block-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+      flex-direction: column;
+    }
+    #block-overlay button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Item Management</h1>
+
+  <div class="header-controls">
+    <button id="btnBack">← Back to Inventory Menu</button>
+  </div>
+
+  <!-- Add Item Form -->
+  <section id="addItemSection">
+    <h2>Add New Item</h2>
+    <form id="addItemForm">
+      <input type="text" id="itemName" placeholder="Item Name" required>
+      <input type="number" id="itemPrice" placeholder="Price" step="0.01" min="0" required>
+      <select id="categorySelect" required></select>
+      <select id="subcategorySelect" required></select>
+      <input type="text" id="itemImageUrl" placeholder="Image URL (optional)">
+      <textarea id="itemDescription" placeholder="Description"></textarea>
+      <button type="submit">Add Item</button>
+    </form>
+  </section>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search items...">
+    <div id="suggestionsBox" class="suggestions"></div>
+  </div>
+
+  <!-- Item List -->
+  <section id="itemListSection">
+    <h2>Existing Items</h2>
+    <table id="itemTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Subcategory</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <hr>
+
+  <!-- Add Merchandise Form -->
+  <section id="addMerchSection">
+    <h2>Add New Merchandise</h2>
+    <form id="addMerchForm">
+      <input type="text" id="merchName" placeholder="Merchandise Name" required>
+      <input type="number" id="merchPrice" placeholder="Price" step="0.01" min="0" required>
+      <select id="merchSubcategorySelect" required></select>
+      <input type="text" id="merchImageUrl" placeholder="Image URL (optional)">
+      <textarea id="merchDescription" placeholder="Description"></textarea>
+      <button type="submit">Add Merchandise</button>
+    </form>
+  </section>
+
+  <!-- Merchandise Search -->
+  <div class="search-container">
+    <input type="text" id="merchSearchInput" placeholder="Search merchandise...">
+  </div>
+
+  <!-- Merchandise List -->
+  <section id="merchListSection">
+    <h2>Existing Merchandise</h2>
+    <table id="merchTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Subcategory</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- Config must load first so window.API_BASE_PATH is set -->
+  <script type="module" src="../../../js/config.js"></script>
+  <!-- App logic -->
+  <script src="../js/item_management.js"></script>
+
+  <!-- Security / Role Restriction -->
+  <script>
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    const userRole = loggedInUser ? loggedInUser.type : null;
+    const userName = localStorage.getItem("customer_name") || "Guest";
+
+    if (!userRole) {
+      // Not logged in
+      document.body.innerHTML = "";
+      const overlay = document.createElement("div");
+      overlay.id = "block-overlay";
+      overlay.textContent = "🚨 Security Alert: You must log in first to access the admin panel.";
+      document.body.appendChild(overlay);
+    } else if (userRole !== "admin") {
+      // Logged in but not admin
+      document.body.innerHTML = "";
+      const overlay = document.createElement("div");
+      overlay.id = "block-overlay";
+      overlay.textContent = "⛔ Access Denied: This panel is restricted to Admins only.";
+      document.body.appendChild(overlay);
+    } else {
+      // Admin logged in — show dynamic welcome message
+      const welcome = document.createElement("div");
+      welcome.id = "welcome-msg";
+      welcome.style.margin = "10px 0";
+      welcome.style.fontWeight = "bold";
+      welcome.textContent = `Welcome, ${userName} (Admin)!`;
+      document.body.insertBefore(welcome, document.body.firstChild);
+    }
+  </script>
+
+</body>
+</html>

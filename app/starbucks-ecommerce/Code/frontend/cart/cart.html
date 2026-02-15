@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Cart</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script type="module" src="../header/header.js"></script>
+    <script type="module" src="../js/main.js"></script>
+    <div id="container">
+        <h1 id="con-title"></h1>
+        <div id="cart">
+            <div class="inner-left" >
+                <ul>
+                    <li class="nav-con">
+                      <a href="#" id="cart-btn">
+                        <img src="../assets/shopping-cart.png" alt="">
+                      </a>
+                    </li>
+                    </li>
+                    <li class="nav-con">
+                      <a href="#" id="history-btn">
+                        <img src="../assets/history.png" alt="">
+                    </a>
+                    </li>
+                </ul>
+            </div>
+            <div id="cart-contents">
+
+            </div>
+        </div>
+    </div>
+
+
+        <!-- Modal -->
+    <div id="paymentModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h3>🧾 Checkout</h3>
+        <p>Total: ₱<span id="paymentTotal">0.00</span></p>
+        <p>Discount: ₱<span id="paymentDiscount">0.00</span></p>
+        <p>Final: ₱<span id="finalAmount">0.00</span></p>
+        <label>Cash:
+          <input type="number" id="cashInput" placeholder="Enter cash" />
+        </label>
+        <label>Payment Type:
+          <select id="paymentType">
+            <option value="cash">Cash</option>
+            <option value="gcash">GCash</option>
+          </select>
+        </label>
+        <div class="modal-actions">
+          <button onclick="processPayment()">Pay</button>
+          <button onclick="closePaymentModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Receipt -->
+    <div id="receiptContainer">
+      <div id="receiptBox">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </main>
+    <script type="module" src="js/switchHtml.js"></script>
+</body>
+</html>

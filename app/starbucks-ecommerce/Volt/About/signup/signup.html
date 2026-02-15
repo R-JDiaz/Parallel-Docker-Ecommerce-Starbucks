@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starbucks Sign In</title>
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+   <ul id="head-nav">
+        <li>
+            <img class="logo" src="../assets/starbucksLogo-nocircle.png" alt="starbucks">
+        </li>
+        <li class="nav-list">
+            <nav>
+                <a href="">Home</a>
+                <a href="">Menu</a>
+                <a href="">About Us</a>
+            </nav>
+        </li>
+        <li >
+            <ul id="icon-list">
+            <li>
+                <img class="icon" src="../assets/shopping-cart.png" alt="cart">
+            </li>
+            <li>
+                <img class="icon" src="../assets/user.png" alt="user">
+            </li>
+            <button><span>SIGN UP</span></button>
+            </ul>
+        </li>
+    </ul>
+
+    <!-- Main Content -->
+     <div id="line"></div>
+    <main class="container">
+        <!-- Left Form -->
+        <section class="form-section">
+            <h1>Sign in</h1>
+            <p>Don't have an account? <a href="#">Create now</a></p>
+
+            <label>Email</label>
+            <input type="email" placeholder="Email">
+
+            <label>Password</label>
+            <div class="password-container">
+                <input type="password" placeholder="Password">
+                <span class="show-pass">👁</span>
+            </div>
+
+            <div class="options">
+                <label id="save-acct"><input type="checkbox">  Save account</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button class="signin-btn">Sign in</button>
+
+            <div class="divider">or</div>
+
+            <button class="google-btn">Continue with Google</button>
+            <button class="fb-btn">Continue with Facebook</button>
+        </section>
+
+        <!-- Right Image -->
+        <section class="image-section">
+            <img src="../assets/starbucksLogo-nocircle.png" alt="Starbucks Logo">
+        </section>
+    </main>
+
+</body>
+</html>

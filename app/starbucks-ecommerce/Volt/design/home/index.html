@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LandingPage-Starbucks</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main>
+    <section id="home">
+      <nav id="top">
+        <img src="assets/starbucksLogo-white-nocircle.png" alt="logo" />
+
+        <ul id="nav">
+          <li><a href="#LeftHome">Home</a></li>
+          <li><a href="../../frontend/menu/menu.html">Menu</a></li>
+          <li><a href="#">Rewards</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+
+        <div style="display: flex; align-items: center; gap: 15px; margin-right: 2vw;">
+          <!-- Admin button placeholder -->
+          <div id="admin-btn-container"></div>
+
+          <!-- Login/Logout placeholder -->
+          <div id="auth-btn-container">
+            <button id="login-btn" onclick="window.location.href='../../frontend/login/login.html'"
+              style="padding: 8px 14px; background-color: white; color: #006241; font-weight: bold; border: none; border-radius: 20px; cursor: pointer;">
+              Login
+            </button>
+          </div>
+
+          
+<div>
+  <img class="icon" id="profile-icon" src="assets/user-default-nocircle.png" alt="user" style="cursor:pointer;">
+</div>
+
+
+          <img src="assets/shopping-cart-default-nocircle.png" class="icon" alt="cart-icon" />
+        </div>
+      </nav>
+
+      <div id="contents">
+        <div id="leftHome" href>
+          <span class="title" id="intro1">Where Everycups tells a story.</span>
+          <h1 class="title" id=intro2>What's <span id="intro3">Yours?</span></h1>
+
+          <h2 class="title" id="CoffeeName">Classic Ice Coffee</h2>
+          <p id="description">"Indlige in the bold, smooth taste of Starbucks Iced Coffee — perfectly chilled, refreshingly energizing, and crafted to keep you cool and focused all day long."</p>
+
+          <p id="rating">Best Rating <span id="ratingVal"> $8.6</span></p>
+          <button class="Cart" type="submit"><span>Add to Cart</span></button>
+
+          <div id="selection">
+            <ul>
+              <li><div class="outer-circle"><div class="inner-circle"><img src="assets/ClassicCup.png" alt=""></div></div></li>
+              <li><div class="outer-circle"><div class="inner-circle"><img src="assets/ClassicCup.png" alt=""></div></div></li>
+              <li><div class="outer-circle"><div class="inner-circle"><img src="assets/ClassicCup.png" alt=""></div></div></li>
+            </ul>
+          </div>
+        </div>
+        <div id="rightHome">
+          <div id="greenBg">
+            <img src="assets/ClassicCup.png" alt="product">
+            <div id="nameContainer">
+              <h1 id="firstName">Classic</h1>
+              <h1 id="secondName">Ice-Coffee</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <nav>
+        <ul>
+          <li><div><button onclick="loadTopSelling('Beverages')">🔥 Top Drinks</button></div></li>
+          <li><div><button onclick="loadTopSelling('Food')">🔥 Top Food</button></div></li>
+          <li><div><button onclick="loadTopSelling('Merchandise')">🔥 Top Merchandise</button></div></li>
+
+          <li><div><a href="atHome">atHome</a></div></li>
+          <li><div id="merch"><a href="merchandise">merchandise</a></div></li>
+        </ul>
+      </nav>
+
+      <div id="foodSelection">
+        <ul>
+          <li class="prodInfo">
+            <div class="contents">
+              <img src="assets/ClassicCup.png" alt="product">
+              <h2>caramel latte</h2>
+              <div class="ingInfo">
+                <ul id="ingName">
+                  <li>milk</li>
+                  <li>cream</li>
+                  <li>toppings</li>
+                </ul>
+                <ul id="ingOpt">
+                  <a href="">option</a>
+                  <a href="">option</a>
+                  <a href="">option</a>
+                </ul>
+              </div>
+              <button type="submit">add to cart</button>
+            </div>
+          </li>
+          <li class="prodInfo">
+            <div class="contents">
+              <img src="assets/ClassicCup.png" alt="product">
+              <h2>mocha frappe</h2>
+              <div class="ingInfo">
+                <ul id="ingName">
+                  <li>milk</li>
+                  <li>cream</li>
+                  <li>toppings</li>
+                </ul>
+                <ul id="ingOpt">
+                  <a href="">option</a>
+                  <a href="">option</a>
+                  <a href="">option</a>
+                </ul>
+              </div>
+              <button type="submit">add to cart</button>
+            </div>
+          </li>
+          <li class="prodInfo">
+            <div class="contents">
+              <img src="assets/ClassicCup.png" alt="product">
+              <h2>cappucinno</h2>
+              <div class="ingInfo">
+                <ul id="ingName">
+                  <li>milk</li>
+                  <li>cream</li>
+                  <li>toppings</li>
+                </ul>
+                <ul id="ingOpt">
+                  <a href="">option</a>
+                  <a href="">option</a>
+                  <a href="">option</a>
+                </ul>
+              </div>
+              <button type="submit">add to cart</button>
+            </div>
+          </li>
+          <li class="prodInfo">
+            <div class="contents">
+              <img src="assets/ClassicCup.png" alt="product">
+              <h2>brewed coffee</h2>
+              <div class="ingInfo">
+                <ul id="ingName">
+                  <li>milk</li>
+                  <li>cream</li>
+                  <li>toppings</li>
+                </ul>
+                <ul id="ingOpt">
+                  <a href="">option</a>
+                  <a href="">option</a>
+                  <a href="">option</a>
+                </ul>
+              </div>
+              <button type="submit">add to cart</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="unmatched">
+      <div id="quote">
+        <h1>unmatched</h1>
+        <h1>quality</h1>
+      </div>
+      <img src="assets/ClassicCup.png" alt="">
+      <div id="line">
+        <span>starbucks</span>
+        <span>starbucks</span>
+        <span>starbucks</span>
+        <span>starbucks</span>
+        <span>starbucks</span>
+        <span>starbucks</span>
+      </div>
+      <p id="firstQuote">Starbucks redefines the coffee experience with every cup, blending quality, flavor and comfort</p>
+      <p id="secondQuote">At Starbucks every sip is a journey into a world of rich aromatic coffee perfection.</p>
+    </section>
+    <section id="popular"></section>
+    <section id="stores"></section>
+    <section id="footer"></section>
+  </main>
+  <!-- Profile Modal -->
+<div id="profile-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="close-profile" class="close">&times;</span>
+    
+    <h2>User Profile</h2>
+ <img id="profile-image" src="../assets/user.png" alt="Profile" width="100">
+  <label for="profile-image-url">Profile Image URL</label>
+<input type="text" id="profile-image-url" placeholder="Enter image URL">
+
+<button id="open-image-picker">Choose from Gallery</button>
+
+
+  <div id="image-picker-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span id="close-image-picker" class="close">&times;</span>
+    <h3>Select Profile Image</h3>
+    <div id="image-picker-grid" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
+  </div>
+</div>
+
+    <form id="profile-form">
+      <label>First Name</label>
+      <input type="text" id="first_name" name="first_name">
+
+      <label>Middle Name</label>
+      <input type="text" id="middle_name" name="middle_name">
+
+      <label>Last Name</label>
+      <input type="text" id="last_name" name="last_name">
+
+     <h3>Address</h3>
+<input type="text" id="street" placeholder="Street">
+
+<label for="country">Country</label>
+<select id="country"></select>
+
+<label for="province">Province</label>
+<select id="province"></select>
+
+<label for="city">City</label>
+<select id="city"></select>
+
+
+      <button type="submit">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+
+  <script type="module" src="../../frontend/js/main.js"></script>
+
+  <!-- Auth/Admin Button Logic -->
+  <script>
+
+    const userData = localStorage.getItem("loggedInUser");
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    const authContainer = document.getElementById("auth-btn-container");
+    const adminContainer = document.getElementById("admin-btn-container");
+
+    if (isLoggedIn && userData) {
+      const user = JSON.parse(userData);
+
+      // Replace Login with Logout
+      authContainer.innerHTML = "";
+      const logoutBtn = document.createElement("button");
+      logoutBtn.textContent = "Logout";
+      logoutBtn.style.padding = "8px 14px";
+      logoutBtn.style.backgroundColor = "white";
+      logoutBtn.style.color = "#006241";
+      logoutBtn.style.fontWeight = "bold";
+      logoutBtn.style.border = "none";
+      logoutBtn.style.borderRadius = "20px";
+      logoutBtn.style.cursor = "pointer";
+      logoutBtn.onclick = () => window.logout();
+      authContainer.appendChild(logoutBtn);
+
+      // Show Admin Dashboard if admin
+      if (user.type === "admin") {
+        const btn = document.createElement("button");
+        btn.textContent = "Admin Dashboard";
+        btn.style.padding = "8px 14px";
+        btn.style.backgroundColor = "#006241";
+        btn.style.color = "white";
+        btn.style.fontWeight = "bold";
+        btn.style.border = "none";
+        btn.style.borderRadius = "20px";
+        btn.style.cursor = "pointer";
+        btn.onclick = () => window.location.href = "../../frontend/admin/panel/panel.html";
+        adminContainer.appendChild(btn);
+      }
+    }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const profileIcon = document.getElementById("profile-icon");
+    const profileModal = document.getElementById("profile-modal");
+    const closeProfile = document.getElementById("close-profile");
+
+    if (profileIcon && profileModal && closeProfile) {
+      // Open modal on profile icon click
+      profileIcon.addEventListener("click", () => {
+        profileModal.style.display = "block";
+      });
+
+      // Close modal on X click
+      closeProfile.addEventListener("click", () => {
+        profileModal.style.display = "none";
+      });
+
+      // Close modal if clicked outside content
+      window.addEventListener("click", (event) => {
+        if (event.target === profileModal) {
+          profileModal.style.display = "none";
+        }
+      });
+    }
+  });
+
+
+  </script>
+
+<style>
+.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
+
+.close {
+  position: absolute;
+  top: 15px; right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#profile-modal h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #006241;
+}
+
+#profile-modal img#profile-image {
+  display: block;
+  margin: 0 auto 15px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #006241;
+}
+
+#profile-form label {
+  display: block;
+  margin: 12px 0 4px;
+  font-weight: 600;
+  color: #333;
+}
+
+#profile-form input, #profile-form select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+#profile-form button {
+  width: 100%;
+  padding: 10px;
+  background: #006241;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+#profile-form button:hover {
+  background: #004f1a;
+}
+</style>
+
+</body>
+</html>

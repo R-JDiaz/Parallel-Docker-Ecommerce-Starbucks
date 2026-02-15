@@ -1,0 +1,87 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(to right, #f0f2f5, #dfe6e9);
+  color: #2c3e50;
+  padding: 40px;
+}
+
+/* Page title */
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 40px;
+  color: #34495e;
+  font-weight: 600;
+}
+
+/* Back button */
+div > button {
+  background-color: #7f8c8d;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+div > button:hover {
+  background-color: #636e72;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Inventory menu container */
+.inventory-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+/* Inventory menu buttons */
+.inventory-menu button {
+  background-color: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 16px 28px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 220px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  position: relative;
+}
+
+/* Hover effect: lift and shadow */
+.inventory-menu button:hover {
+  background-color: #219150;
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .inventory-menu {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .inventory-menu button {
+    width: 90%;
+    max-width: 320px;
+  }
+}

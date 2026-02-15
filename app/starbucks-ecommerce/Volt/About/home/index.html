@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LandingPage-Starbucks</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;700;800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <main>
+        <section id="home">
+        <nav id="top">
+  <img src="assets/starbucksLogo-white-nocircle.png" alt="logo" />
+
+  <ul id="nav">
+    <li><a href="#LeftHome">Home</a></li>
+    <li><a href="../../frontend/menu/menu.html">Menu</a></li>
+    <li><a href="#">Rewards</a></li>
+    <li><a href="#">Gift Cards</a></li>
+  </ul>
+
+  <div style="display: flex; align-items: center; gap: 15px; margin-right: 2vw;">
+    <button onclick="window.location.href='../../frontend/login/login.html'"
+      style="padding: 8px 14px; background-color: white; color: #006241; font-weight: bold; border: none; border-radius: 20px; cursor: pointer;">
+      Login
+    </button>
+    <img src="assets/user-default-nocircle.png" id="user" class="icon" alt="user-icon" />
+    <img src="assets/shopping-cart-default-nocircle.png" id="cart" class="icon" alt="cart-icon" />
+  </div>
+</nav>
+        <div id="contents">
+        <div id="leftHome" href>
+            <span class="title" id="intro1">Where Everycups tells a story.</span>
+            <h1 class="title" id=intro2>What's <span id="intro3">Yours?</span></h1>
+
+            <h2 class="title" id="CoffeeName">Classic Ice Coffee</h2>
+            <p id="description" >"Indlige in the bold, smooth taste of Starbucks Iced Coffee — perfectly chilled, refreshingly energizing, and crafted to keep you cool and focused all day long."</p>
+
+            <p id="rating">Best Rating <span id="ratingVal"> $8.6</span></p>
+            <button class="Cart" type="submit"><span>Add to Cart</span></button>
+
+            <div id="selection">
+                <ul>
+                    <li><div class="outer-circle"><div class="inner-circle"><img src="assets/ClassicCup.png" alt=""></div></div></li>
+                    <li><div class="outer-circle"><div class="inner-circle"><img src="assets/ClassicCup.png" alt=""></div></div></li>
+                    <li><div class="outer-circle"><div class="inner-circle"><img src="assets/ClassicCup.png" alt=""></div></div></li>
+                </ul>
+            </div>
+        </div>
+        <div id="rightHome">
+            <div id="greenBg">
+                <img src="assets/ClassicCup.png" alt="product">
+                <div id="nameContainer">
+                <h1 id="firstName">Classic</h1>
+                <h1 id="secondName">Ice-Coffee</h1>
+                </div>
+            </div>
+        </div>
+        </div>
+        </section>
+        <section id="menu">
+            <nav>
+            <ul>
+                <li><div><button onclick="loadTopSelling('Drink')">🔥 Top Drinks</button></div></li>
+                <li><div><button onclick="loadTopSelling('Sandwich')">🔥 Top Food</button></div></li>
+
+                <li><div><a href="atHome">atHome</a></div></li>
+                <li><div id="merch"><a href="merchandise">merchandise</a></div></li>
+            </ul>
+            </nav>
+
+            <div id="foodSelection">
+                <ul>
+                    <li class="prodInfo">
+                        <div class="contents">
+                            <img src="assets/ClassicCup.png" alt="product">
+                            <h2>caramel latte</h2>
+                            <div class="ingInfo">
+                            <ul id="ingName">
+                                <li>milk</li>
+                                <li>cream</li>
+                                <li>toppings</li>
+                            </ul>
+                            <ul id="ingOpt">
+                                <a href="">option</a>
+                                <a href="">option</a>
+                                <a href="">option</a>
+                            </ul>
+                            </div>
+                        
+                        <button type="submit">add to cart</button>
+                        </div>
+                    </li>
+                    <li class="prodInfo">
+                        <div class="contents">
+                            <img src="assets/ClassicCup.png" alt="product">
+                            <h2>mocha frappe</h2>
+                            <div class="ingInfo">
+                            <ul id="ingName">
+                                <li>milk</li>
+                                <li>cream</li>
+                                <li>toppings</li>
+                            </ul>
+                            <ul id="ingOpt">
+                                <a href="">option</a>
+                                <a href="">option</a>
+                                <a href="">option</a>
+                            </ul>
+                            </div>
+                        
+                        <button type="submit">add to cart</button>
+                        </div>
+                    </li>
+                    <li class="prodInfo">
+                        <div  class="contents">
+                            <img src="assets/ClassicCup.png" alt="product">
+                            <h2>cappucinno</h2>
+                            <div class="ingInfo">
+                            <ul id="ingName">
+                                <li>milk</li>
+                                <li>cream</li>
+                                <li>toppings</li>
+                            </ul>
+                            <ul id="ingOpt">
+                                <a href="">option</a>
+                                <a href="">option</a>
+                                <a href="">option</a>
+                            </ul>
+                            </div>
+                        
+                        <button type="submit">add to cart</button>
+                        </div>
+                    </li>                        
+                    <li class="prodInfo">
+                        <div  class="contents">
+                            
+                            <img src="assets/ClassicCup.png" alt="product">
+                            <h2>brewed coffee</h2>
+                            <div class="ingInfo">
+                            <ul id="ingName">
+                                <li>milk</li>
+                                <li>cream</li>
+                                <li>toppings</li>
+                            </ul>
+                            <ul id="ingOpt">
+                                <a href="">option</a>
+                                <a href="">option</a>
+                                <a href="">option</a>
+                            </ul>
+                            </div>
+                        
+                        <button type="submit">add to cart</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </section>
+        <section id="unmatched">
+            <div id="quote">
+            <h1>unmatched</h1>
+            <h1>quality</h1>
+            </div>
+            <img src="assets/ClassicCup.png" alt="">
+            <div id="line">
+                <span>starbucks</span>
+                <span>starbucks</span>
+                <span>starbucks</span>
+                <span>starbucks</span>
+                <span>starbucks</span>
+                <span>starbucks</span>
+        
+            </div>
+            <p id="firstQuote">Starbucks redefines the coffee experience with every cup, blending quality, flavor and comfort</p>
+            <p id="secondQuote">At Starbucks every sip is a journey into a world of rich aromatic coffee perfection.</p>
+        </section>
+        <section id="popular">
+        </section>
+        <section id="stores">
+        </section>
+        <section id="footer">
+        </section>
+        </section>
+        
+    </main>
+
+
+    <script type="module" src="../../frontend/js/main.js"></script>
+    
+</body>
+</html>

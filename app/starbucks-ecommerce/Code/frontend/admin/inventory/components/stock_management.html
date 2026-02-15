@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Inventory — Stock Management</title>
+  <link rel="stylesheet" href="../css/stock_management.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Overlay styling */
+    #block-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+    #block-overlay button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Stock Management</h1>
+
+  <div class="header-controls">
+    <button id="btnBack">← Back to Inventory Menu</button>
+    <button id="btnRefreshStocks">🔄 Refresh All Stocks</button>
+  </div>
+
+  <!-- Add Stock Form -->
+  <section id="addStockSection">
+    <h2>Add Stock</h2>
+    <form id="addStockForm">
+      <select id="itemSelect" required>
+        <option value="">Select Item</option>
+      </select>
+      <select id="sizeSelect">
+        <option value="">Select Size</option>
+      </select>
+      <input type="number" id="stockQuantity" placeholder="Quantity" min="1" required>
+      <button type="submit">Add Stock</button>
+    </form>
+  </section>
+
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search stocks by item name...">
+    <div id="suggestionsBox" class="suggestions"></div>
+  </div>
+<!-- Low Stock Section -->
+<section id="thresholdSection">
+  <h2>Low Stock Threshold</h2>
+  <input type="number" id="thresholdInput" value="10" min="1">
+  <button id="btnSetThreshold">Set Threshold</button>
+</section>
+
+
+  <!-- Current Stocks Display -->
+  <section id="stockListSection">
+    <h2>Current Stock Levels</h2>
+    <div id="stocksContainer">
+      <div class="stock-empty">Loading stocks...</div>
+    </div>
+  </section>
+
+  <!-- Config must load first so window.API_BASE_PATH is set -->
+  <script type="module" src="../../../js/config.js"></script>
+  <!-- App logic -->
+  <script src="../js/stock_management.js"></script>
+
+<!-- Security overlay -->
+<script>
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const userRole = loggedInUser ? loggedInUser.type : null;
+  const userName = localStorage.getItem("customer_name") || "Guest";
+
+  if (!userRole) {
+    // Not logged in
+    document.body.innerHTML = "";
+    const overlay = document.createElement("div");
+    overlay.id = "block-overlay";
+    overlay.textContent = "🚨 Security Alert: You must log in first to access the admin panel.";
+    document.body.appendChild(overlay);
+  } else if (userRole !== "admin") {
+    // Logged in but not admin
+    document.body.innerHTML = "";
+    const overlay = document.createElement("div");
+    overlay.id = "block-overlay";
+    overlay.textContent = "⛔ Access Denied: This panel is restricted to Admins only.";
+    document.body.appendChild(overlay);
+  } else {
+    // If admin, insert welcome message under the <h1>
+    const mainTitle = document.querySelector("h1");
+    if (mainTitle) {
+      mainTitle.insertAdjacentHTML("afterend", `<p id="welcome-msg">Welcome, ${userName} (Admin)!</p>`);
+    }
+  }
+</script>
+
+
+</body>
+</html>

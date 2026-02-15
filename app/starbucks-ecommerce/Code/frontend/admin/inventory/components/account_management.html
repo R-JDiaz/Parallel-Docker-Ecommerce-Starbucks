@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Account Management</title>
+  <link rel="stylesheet" href="../css/account_management.css">
+  <style>
+    /* Overlay styling */
+    #block-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+      z-index: 9999;
+      text-align: center;
+      padding: 20px;
+    }
+    #block-overlay button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="account-management">
+    <h2>Account Management</h2>
+
+    <!-- Back Button -->
+    <button class="btn-back" onclick="window.history.back();">
+         Back
+    </button>
+
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Filled dynamically via JS -->
+        </tbody>
+    </table>
+  </div>
+
+  <script type="module" src="../../../js/config.js"></script>
+  <script type="module" src="../js/account_management.js"></script>
+
+<script>
+  const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+  const isGuest = localStorage.getItem("isGuest") === "true";
+  const userRole = loggedInUser ? loggedInUser.type : (isGuest ? "guest" : null);
+
+  function showOverlay(message, redirect = false) {
+    document.body.innerHTML = "";
+    const overlay = document.createElement("div");
+    overlay.id = "block-overlay";
+    overlay.innerHTML = `
+      <div>${message}</div>
+
+
+    `;
+    document.body.appendChild(overlay);
+
+    if (redirect) {
+      setTimeout(() => {
+        window.location.href = "../../../frontend/home/home.html";
+      }, 2500); // auto redirect after 2.5s
+    }
+  }
+
+  if (!userRole) {
+    // Not logged in
+    showOverlay("🚨 Security Alert: You must log in first to access the admin panel.", true);
+  } else if (userRole !== "admin") {
+    // Logged in but not admin
+    showOverlay("⛔ Access Denied: This panel is restricted to Admins only.", true);
+  }
+</script>
+
+</body>
+</html>

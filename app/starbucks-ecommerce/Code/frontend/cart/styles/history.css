@@ -1,0 +1,97 @@
+
+.his-main-container {
+    width: inherit;
+    height: 65vh;
+    border: 0 20px 20px 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.receipt-box {
+  background-color: rgb(0, 69, 0);
+  padding: 24px;
+  margin-bottom: 20px;
+  border-left: 6px solid var(--main-color-green);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+}
+
+.receipt-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.receipt-box h3 {
+  margin-top: 0;
+  color: var(--main-color-green);
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+}
+
+.receipt-box p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #ffffffcc;
+}
+
+/* Badge style for each item */
+.receipt-item {
+  display: inline-block;
+  background-color: var(--main-color-green);
+  color: white;
+  padding: 6px 16px;
+  margin: 6px 8px 0 0;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #28282888;
+  margin-top: 2rem;
+}
+
+.receipt-box hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 15px;
+}
+
+.back-button-wrapper {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.back-button {
+  display: inline-block;
+  background-color: var(--main-color-green);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: var(--main-color-lightgreen);
+  transform: translateY(-2px);
+}
+
+.item-img {
+    width: 20px;
+    height: 20px;
+}
