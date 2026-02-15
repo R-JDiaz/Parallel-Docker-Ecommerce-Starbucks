@@ -1,135 +1,110 @@
 <?php
 class Payment {
     private $con;
-
-    public function __construct($con) {
+    private $slave;
+    public function __construct($con, $slave) {
         $this->con = $con;
+        $this->slave = $slave;
     }
 
     public function saveReceipt($type, $paid, $total, $discount, $final) {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+
         $now = date('Y-m-d H:i:s');
 
-        // 1. Get current user (required for orders)
         if (!isset($_SESSION['user_id'])) {
-            return ['success' => false, 'error' => 'User not logged in.'];
+            return ['success'=>false, 'error'=>'User not logged in.'];
         }
-
         $userId = $_SESSION['user_id'];
+
         require_once dirname(__DIR__) . '/model/Cart.php'; 
-        $cartModel = new Cart($this->con);
+        $cartModel = new Cart($this->con, $this->slave);
         $cart = $cartModel->getCartItems($userId);
 
         if (empty($cart)) {
-            return ['success' => false, 'error' => 'Cart is empty.'];
+            return ['success'=>false, 'error'=>'Cart is empty.'];
         }
 
-        // 2. Insert new userorder
-        $stmt = $this->con->prepare("INSERT INTO userorder (user_id, total_amount, status, placed_at, updated_at) VALUES (?, ?, 'pending', ?, ?)");
-        $stmt->bind_param("idss", $userId, $total, $now, $now);
-        if (!$stmt->execute()) {
-            return ['success' => false, 'error' => 'Failed to insert userorder.'];
-        }
-        $orderId = $this->con->insert_id;
-        $stmt->close();
-
-        // 3. Insert order items (existing logic, unchanged)
-        foreach ($cart as $item) {
-            $itemId    = $item['item_id'] ?? $item['id'];  
-            $qty       = (int)$item['quantity'];
-            $unitPrice = $item['price'];  
-            $sizeId    = isset($item['size_id']) ? $item['size_id'] : null; 
-            $itemType  = $item['item_type'] ?? 'starbucksitem'; 
-
-            $stmt = $this->con->prepare("INSERT INTO order_item (order_id, item_id, item_type, size_id, quantity, unit_price) VALUES (?, ?, ?, ?, ?, ?)");
-            if (!$stmt) {
-                $stmt = $this->con->prepare("INSERT INTO order_item (order_id, item_id, size_id, quantity, unit_price) VALUES (?, ?, ?, ?, ?)");
-                if (!$stmt) {
-                    return ['success' => false, 'error' => 'Failed to prepare order_item insert.'];
-                }
-                $stmt->bind_param("iiiid", $orderId, $itemId, $sizeId, $qty, $unitPrice);
-            } else {
-                $stmt->bind_param("iisiid", $orderId, $itemId, $itemType, $sizeId, $qty, $unitPrice);
-            }
-
-            if (!$stmt->execute()) {
-                return ['success' => false, 'error' => 'Failed to insert order item: ' . $stmt->error];
-            }
+        try {
+            // 1. Insert order
+            $stmt = $this->con->prepare("INSERT INTO userorder (user_id, total_amount, status, placed_at, updated_at) VALUES (?, ?, 'pending', ?, ?)");
+            if (!$stmt) throw new Exception("Failed to prepare userorder insert: " . $this->con->error);
+            $stmt->bind_param("idss", $userId, $total, $now, $now);
+            if (!$stmt->execute()) throw new Exception("Failed to insert userorder: " . $stmt->error);
+            $orderId = $this->con->insert_id;
             $stmt->close();
+
+            // 2. Insert order items
+            foreach ($cart as $item) {
+                $itemId   = $item['item_id'] ?? $item['id'];
+                $qty      = (int)$item['quantity'];
+                $unitPrice= $item['price'];
+                $sizeId   = $item['size_id'] ?? null;
+                $itemType = $item['item_type'] ?? 'starbucksitem';
+
+                $stmt = $this->con->prepare("INSERT INTO order_item (order_id, item_id, item_type, size_id, quantity, unit_price) VALUES (?, ?, ?, ?, ?, ?)");
+                if (!$stmt) throw new Exception("Failed to prepare order_item insert: " . $this->con->error);
+                $stmt->bind_param("iisiid", $orderId, $itemId, $itemType, $sizeId, $qty, $unitPrice);
+                if (!$stmt->execute()) throw new Exception("Failed to insert order_item: " . $stmt->error);
+                $stmt->close();
+            }
+
+            // 3. Insert receipt
+            $discountAmount = $total - $final;
+            $validTypes = ['none','senior','store_card','custom'];
+            $discountType = in_array($type, $validTypes, true) ? $type : 'none';
+
+            $stmt = $this->con->prepare("INSERT INTO receipt (order_id, discount_type, discount_value, discount_amount, final_amount, payment_amount, issued_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            if (!$stmt) throw new Exception("Failed to prepare receipt insert: " . $this->con->error);
+            $stmt->bind_param("isdddds", $orderId, $discountType, $discount, $discountAmount, $final, $paid, $now);
+            if (!$stmt->execute()) throw new Exception("Failed to insert receipt: " . $stmt->error);
+            $receiptId = $this->con->insert_id;
+            $stmt->close();
+
+            // 4. Calculate change
+            $stmt = $this->con->prepare("SELECT change_amount FROM receipt WHERE id = ?");
+            $stmt->bind_param("i", $receiptId);
+            $stmt->execute();
+            $resultRow = $stmt->get_result()->fetch_assoc();
+            $changeAmount = $resultRow['change_amount'] ?? 0;
+            $stmt->close();
+
+            // 5. Update receipt code
+            $receiptCode = "RCPT-" . date('Ymd') . '-' . str_pad($receiptId, 4, '0', STR_PAD_LEFT);
+            $stmt = $this->con->prepare("UPDATE receipt SET receipt_code=? WHERE id=?");
+            $stmt->bind_param("si", $receiptCode, $receiptId);
+            $stmt->execute();
+            $stmt->close();
+
+            // 6. Update order to completed
+            $stmt = $this->con->prepare("UPDATE userorder SET status='completed', updated_at=? WHERE id=?");
+            $stmt->bind_param("si", $now, $orderId);
+            $stmt->execute();
+            $stmt->close();
+
+            // 7. Deduct inventory safely
+            $this->deductItemQuantities($orderId);
+
+            // 8. Clear cart
+            $stmt = $this->con->prepare("DELETE FROM cart_item WHERE user_id=?");
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+            $stmt->close();
+
+            return [
+                'success'=>true,
+                'orderId'=>$orderId,
+                'receiptId'=>$receiptId,
+                'receiptCode'=>$receiptCode,
+                'changeAmount'=>$changeAmount
+            ];
+
+        } catch (Exception $e) {
+            error_log("Payment saveReceipt exception: ".$e->getMessage());
+            return ['success'=>false, 'error'=>$e->getMessage()];
         }
-
-        // 4. Calculate values
-        $discountAmount = $total - $final;
-
-        // 5. Insert receipt **without change_amount**
-        $validDiscountTypes = ['none', 'senior', 'store_card', 'custom'];
-        $discountTypeForInsert = in_array($type, $validDiscountTypes, true) ? $type : 'none';
-
-        $stmt = $this->con->prepare("INSERT INTO receipt (
-            order_id, discount_type, discount_value, discount_amount,
-            final_amount, payment_amount, issued_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        if (!$stmt) {
-            return ['success' => false, 'error' => 'Failed to prepare receipt insert'];
-        }
-
-        $stmt->bind_param("isdddds", 
-    $orderId, 
-    $discountTypeForInsert, 
-    $discount, 
-    $discountAmount, 
-    $final, 
-    $paid, 
-    $now
-);
-
-        if (!$stmt->execute()) {
-            return ['success' => false, 'error' => 'Failed to insert receipt'];
-        }
-
-        $receiptId = $this->con->insert_id;
-        $stmt->close();
-
-        // Fetch generated change_amount
-        $stmt = $this->con->prepare("SELECT change_amount FROM receipt WHERE id = ?");
-        $stmt->bind_param("i", $receiptId);
-        $stmt->execute();
-        $resultRow = $stmt->get_result()->fetch_assoc();
-        $changeAmount = $resultRow['change_amount'] ?? 0;
-        $stmt->close();
-
-        // 6. Generate and update receipt code
-        $receiptCode = "RCPT-" . date('Ymd') . '-' . str_pad($receiptId, 4, '0', STR_PAD_LEFT);
-        $stmt = $this->con->prepare("UPDATE receipt SET receipt_code = ? WHERE id = ?");
-        $stmt->bind_param("si", $receiptCode, $receiptId);
-        $stmt->execute();
-        $stmt->close();
-
-        // 7. Update order status to completed
-        $stmt = $this->con->prepare("UPDATE userorder SET status = 'completed', updated_at = ? WHERE id = ?");
-        $stmt->bind_param("si", $now, $orderId);
-        $stmt->execute();
-        $stmt->close();
-
-        // 8. Deduct inventory (existing logic, unchanged)
-        $this->deductItemQuantities($orderId);
-
-        $stmt = $this->con->prepare("DELETE FROM cart_item WHERE user_id = ?");
-        $stmt->bind_param("i", $userId);
-        if (!$stmt->execute()) {
-            error_log("❌ Failed to clear cart_item for user $userId: " . $stmt->error);
-        }
-        $stmt->close();
-
-        return [
-            'success' => true,
-            'orderId' => $orderId,
-            'receiptId' => $receiptId,
-            'receiptCode' => $receiptCode,
-            'changeAmount' => $changeAmount
-        ];
     }
 
     private function deductItemQuantities($orderId) {
