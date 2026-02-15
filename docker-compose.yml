@@ -16,7 +16,7 @@ services:
     image: mysql:8.0
     container_name: mysql_master
     restart: always
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=caching_sha2_password
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: softeng
@@ -30,7 +30,7 @@ services:
     image: mysql:8.0
     container_name: mysql_slave
     restart: always
-    command: --default-authentication-plugin=mysql_native_password
+    command: --default-authentication-plugin=caching_sha2_password
     environment:
       MYSQL_ROOT_PASSWORD: root
     ports:
