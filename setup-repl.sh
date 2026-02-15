@@ -1,5 +1,5 @@
 #!/bin/bash
-# Master-Slave replication setup script
+# Master-Slave replication setup script (fixed for caching_sha2_password issue)
 
 # --- CONFIGURATION ---
 MASTER_CONTAINER="mysql_master"
@@ -12,9 +12,12 @@ DB_NAME="softeng"
 # --- Step 1: Configure master ---
 echo "Configuring master..."
 docker exec -i $MASTER_CONTAINER mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "
-CREATE USER IF NOT EXISTS '$REPL_USER'@'%' IDENTIFIED BY '$REPL_PASSWORD';
+-- Create replication user with mysql_native_password to avoid SSL requirement
+CREATE USER IF NOT EXISTS '$REPL_USER'@'%' IDENTIFIED WITH mysql_native_password BY '$REPL_PASSWORD';
 GRANT REPLICATION SLAVE ON *.* TO '$REPL_USER'@'%';
 FLUSH PRIVILEGES;
+
+-- Lock tables to get consistent binlog position
 FLUSH TABLES WITH READ LOCK;
 SHOW MASTER STATUS;
 " > master_status.txt
@@ -38,6 +41,9 @@ CHANGE MASTER TO
   MASTER_LOG_POS=$BINLOG_POS;
 START SLAVE;
 SHOW SLAVE STATUS\G
+"
+docker exec -i $SLAVE_CONTAINER mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "
+CREATE DATABASE IF NOT EXISTS $DB_NAME;
 "
 
 echo "Replication setup complete!"
